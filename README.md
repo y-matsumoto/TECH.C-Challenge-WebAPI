@@ -12,5 +12,8 @@
 * できる人は、GoogleMapも使おうぜらしい。
 
 
-# for All Project Member
-参加する意思のある人は、2014年7月22日21時までに、このリポジトリをStarしてください。
+# プロジェクトメンバ
+* [tgc129](https://github.com/tgc129)
+* [sitri](https://github.com/sitri)
+* [reki（所属だけ）](https://github.com/reki4869)
+* [rameshpathak（所属だけ）](https://github.com/rameshpathak)
