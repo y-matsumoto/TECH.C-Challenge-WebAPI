@@ -8,5 +8,6 @@
     <string name="lon">経度：</string>
     <string name="gpsalert">GPSが無効になっています。\nGPSを有効にしてください。</string>
     <string name="start_btn">クーポンの取得</string>
+    <string name="gpsAlert">GPSをONにしてください。</string>
 
 </resources>
