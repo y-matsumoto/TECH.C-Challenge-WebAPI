@@ -20,16 +20,48 @@ import android.content.Context;
 import android.util.Log;
 
 class Summary{
-	String sName;
-	String sCoupon;
-	String sGenre;
-	String sUrl;
+	private String sName;
+	private String sCoupon;
+	private String sGenre;
+	private String sUrl;
+
+	public String getsName() {
+		return sName;
+	}
+
+	public void setsName(String sName) {
+		this.sName = sName;
+	}
+
+	public String getsCoupon() {
+		return sCoupon;
+	}
+
+	public void setsCoupon(String sCoupon) {
+		this.sCoupon = sCoupon;
+	}
+
+	public String getsGenre() {
+		return sGenre;
+	}
+
+	public void setsGenre(String sGenre) {
+		this.sGenre = sGenre;
+	}
+
+	public String getsUrl() {
+		return sUrl;
+	}
+
+	public void setsUrl(String sUrl) {
+		this.sUrl = sUrl;
+	}
 }
 
 public class HotAsync extends AsyncTaskLoader<List<Summary>>{
 
-	Summary summary;
-	List<Summary> summaryLst;
+	private Summary summary;
+	private List<Summary> summaryLst;
 	private XmlPullParserFactory xpFactory;
 	private XmlPullParser xpp;
 	//緯度
@@ -52,10 +84,9 @@ public class HotAsync extends AsyncTaskLoader<List<Summary>>{
 	public HotAsync(Context context) {
 		super(context);
 		// TODO 自動生成されたコンストラクター・スタブ
-		client = new DefaultHttpClient();
-		//hget   = new HttpGet(url);
-		hget   = new HttpGet(testurl);
-		HttpResponse response = null;
+		client   = new DefaultHttpClient();
+		hget     = new HttpGet(testurl);
+		response = null;
 	}
 
 	@Override
@@ -108,37 +139,39 @@ public class HotAsync extends AsyncTaskLoader<List<Summary>>{
 		 * 解析処理
 		 */
 		try{
-			String tag;
 			int eventType;
 			eventType = xpp.getEventType();
 			summaryLst = new ArrayList<Summary>();
 			//XMLの終わりまで繰り返し
 			while(eventType != xpp.END_DOCUMENT){
-				summary = new Summary();
-				tag = xpp.getName();
 				if(eventType == xpp.START_DOCUMENT){
 					Log.d("XmlPullParser", "ParseStart");
+				}else if(eventType == xpp.START_TAG && "Shop".equals(xpp.getName())){
+					summary = new Summary();
 				}else if(eventType == xpp.START_TAG && "ShopName".equals(xpp.getName())){
 					//店名を取得
-					summary.sName = xpp.nextText();
+					summary.setsName(xpp.nextText());
 				}else if(eventType == xpp.START_TAG && "KtaiCoupon".equals(xpp.getName())){
 					//クーポンの有無
-					summary.sCoupon = xpp.nextText();
+					if("0".equals(xpp.nextText())){
+						summary.setsCoupon("クーポン有り");
+					}
+					summary.setsCoupon("クーポン無し");
 				}else if(eventType == xpp.START_TAG && "GenreName".equals(xpp.getName())){
 					//店ジャンル
-					summary.sGenre = xpp.nextText();
+					summary.setsGenre(xpp.nextText());
 				}else if(eventType == xpp.START_TAG && "ShopUrl".equals(xpp.getName())){
 					//ページURL
-					summary.sUrl = xpp.nextText();
+					summary.setsUrl(xpp.nextText());
 				}else if(eventType == xpp.END_TAG && "Shop".equals(xpp.getName())){
 					summaryLst.add(summary);
 				}
 				eventType = xpp.next();
 			}
+			Log.d("XmlPullParser", "ParseEnd");
 		}catch(Exception e){
 			Log.d("XmlPullParser","ParseError");
 		}
-
 		return summaryLst;
 	}
 

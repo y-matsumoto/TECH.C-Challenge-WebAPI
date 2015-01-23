@@ -16,6 +16,7 @@ public class HotPepperActivity extends Activity implements LoaderCallbacks<List<
 	private static final int LOADER_ID = 0;
 	private ListView lv;
 	private Button btn;
+	private CustomAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +58,8 @@ public class HotPepperActivity extends Activity implements LoaderCallbacks<List<
 	@Override
 	public void onLoadFinished(Loader<List<Summary>> loader, List<Summary> data) {
 		// TODO 自動生成されたメソッド・スタブ
-		//ArrayAdapter<> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,data);
-		//lv.setAdapter(adapter);
+		//adapter = new CustomAdapter(this,data);
+		lv.setAdapter(new CustomAdapter(this,data));
 	}
 
 	@Override
