@@ -4,6 +4,7 @@
     <string name="app_name">HotPepper</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="btntext">情報取得</string>
-
+    <string name="upbtn">更新</string>
+    <string name="cpyes">クーポン有</string>
+    <string name="cpno">クーポン無し</string>
 </resources>
